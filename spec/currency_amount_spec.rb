@@ -24,4 +24,11 @@ RSpec.describe ExchangeRate::CurrencyAmount do
       expect(amount.to_s).to eq('100.0 GBP')
     end
   end
+
+  describe '#to_h' do
+    it 'generates a hash representation' do
+      expect(currency).to receive(:code).and_return('GBP')
+      expect(amount.to_h).to eq({ amount: '100.0', currency: 'GBP' })
+    end
+  end
 end

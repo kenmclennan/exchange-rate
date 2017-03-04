@@ -15,6 +15,10 @@ module ExchangeRate
       "#{amount} #{currency.code}"
     end
 
+    def to_h
+      {amount: amount.to_s, currency: currency.code }
+    end
+
     def to_d
       amount.to_d
     end
