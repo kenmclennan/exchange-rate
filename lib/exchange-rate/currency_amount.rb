@@ -10,5 +10,13 @@ module ExchangeRate
     def amount
       AmountValue.new(@amount)
     end
+
+    def to_s
+      "#{amount} #{currency.code}"
+    end
+
+    def to_d
+      amount.to_d
+    end
   end
 end
