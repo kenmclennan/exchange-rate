@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.describe ExchangeRate::CurrencyConverter do
+RSpec.describe ExchangeRate::ExchangeRateConverter do
   let(:pounds) { ExchangeRate::CurrencyRate.new(date: '2017-02-28', code: 'GBP', rate: '0.5') }
   let(:euros) { ExchangeRate::CurrencyRate.new(date: '2017-02-28', code: 'EUR', rate: '1.0') }
-  let(:converter) { ExchangeRate::CurrencyConverter.new pounds, euros }
+  let(:converter) { ExchangeRate::ExchangeRateConverter.new pounds, euros }
 
   it 'converts between two currency rates' do
     expect(converter.from).to be(pounds)

@@ -1,7 +1,14 @@
 require "exchange-rate/version"
+
 require "exchange-rate/storage/repository"
+require "exchange-rate/storage/base_adapter"
 require "exchange-rate/storage/pstore_adapter"
-require "exchange-rate/currency_converter"
+require "exchange-rate/storage/memory_adapter"
+
+require "exchange-rate/data_source/base_adapter"
+require "exchange-rate/data_source/ecb_adapter"
+
+require "exchange-rate/exchange_rate_converter"
 require "exchange-rate/currency_rate"
 require "exchange-rate/currency_amount"
 require "exchange-rate/amount_value"
@@ -14,7 +21,9 @@ module ExchangeRate
   def self.config
     @config ||= OpenStruct.new(
       db_adapter: ExchangeRate::Storage::PStoreAdapter,
-      pstore_path: File.join(ROOT_DIR,'data','exchange_rates.pstore')
+      pstore_path: File.join(ROOT_DIR,'data','exchange_rates.pstore'),
+      data_source: ExchangeRate::DataSource::ECBAdapter,
+      ecb_uri: "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml",
     )
   end
 
@@ -25,10 +34,14 @@ module ExchangeRate
   def self.at date, from_code, to_code
     from = repository.find_currency_at(date, from_code)
     to   = repository.find_currency_at(date, to_code)
-    CurrencyConverter.new(from, to)
+    ExchangeRateConverter.new(from, to)
   end
 
   def self.repository
     @repository ||= Storage::Repository.new(config.db_adapter.new(config))
+  end
+
+  def self.data_source
+    @data_source ||= config.data_source.new(config)
   end
 end

@@ -1,10 +1,10 @@
 require "bundler/setup"
+require 'webmock/rspec'
 require "exchange-rate"
-
 require "date"
 
 ExchangeRate.configure do |config|
-  config.db_adapter  = ExchangeRate::Storage::PStoreAdapter
+  config.db_adapter  = ExchangeRate::Storage::MemoryAdapter
   config.pstore_path = File.join(ExchangeRate::ROOT_DIR,'spec','data','test_exchange_rates.pstore')
 end
 

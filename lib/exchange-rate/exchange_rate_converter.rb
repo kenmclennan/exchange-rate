@@ -1,5 +1,5 @@
 module ExchangeRate
-  class CurrencyConverter
+  class ExchangeRateConverter
     attr_reader :from, :to
 
     def initialize from, to

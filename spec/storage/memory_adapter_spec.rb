@@ -1,8 +1,8 @@
 require "spec_helper"
 
-RSpec.describe ExchangeRate::Storage::PStoreAdapter do
+RSpec.describe ExchangeRate::Storage::MemoryAdapter do
   let(:config)  { ExchangeRate.config }
-  let(:adapter) { ExchangeRate::Storage::PStoreAdapter.new config }
+  let(:adapter) { ExchangeRate::Storage::MemoryAdapter.new config }
   let(:data)    { { date: '2014-02-02', code: 'PIE', rate: '3.14' } }
 
   describe '#create' do

@@ -1,10 +1,11 @@
 require 'pstore'
 
 module ExchangeRate::Storage
-  class PStoreAdapter
-    def initialize config
-      @config = config
-      @store  = PStore.new(config.pstore_path)
+  class PStoreAdapter< BaseAdapter
+
+    def initialize(*)
+      super
+      @store = PStore.new(@config.pstore_path)
     end
 
     def create attributes
