@@ -13,4 +13,8 @@ namespace :exchange_rates do
     repository  = ExchangeRate.repository
     data_source.update(repository)
   end
+
+  task :truncate do
+    ExchangeRate.repository.truncate!
+  end
 end
