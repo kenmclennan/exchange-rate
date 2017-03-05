@@ -13,7 +13,7 @@ RSpec.describe ExchangeRate::Storage::Repository do
 
   describe '#create' do
     it 'invokes the adapter to store a record' do
-      attrs = { date: "2016-12-01", code: "BTN", rate: "0.6" }
+      attrs = { date: "2016-12-01", code: "BTN", rate: "0.6000" }
 
       expect(adapter).to receive(:create).with(attrs).and_return(attrs)
 
@@ -21,12 +21,12 @@ RSpec.describe ExchangeRate::Storage::Repository do
 
       expect(record.date).to eq("2016-12-01")
       expect(record.code).to eq('BTN')
-      expect(record.rate.to_s).to eq('0.6')
+      expect(record.rate.to_s).to eq('0.6000')
     end
 
     it 'standardises value formats' do
-      dirty = { date: Date.parse('2016-12-01'), code: 'btn', rate: '0.6' }
-      clean = { date: "2016-12-01", code: "BTN", rate: "0.6" }
+      dirty = { date: Date.parse('2016-12-01'), code: 'btn', rate: '0.6000' }
+      clean = { date: "2016-12-01", code: "BTN", rate: "0.6000" }
 
       expect(adapter).to receive(:create).with(clean).and_return(clean)
 
@@ -44,7 +44,7 @@ RSpec.describe ExchangeRate::Storage::Repository do
 
       expect(record.date).to eq("2016-12-01")
       expect(record.code).to eq('GBP')
-      expect(record.rate.to_s).to eq('7.8')
+      expect(record.rate.to_s).to eq('7.8000')
     end
 
     it 'standardises value formats' do

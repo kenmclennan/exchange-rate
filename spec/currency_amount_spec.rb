@@ -7,7 +7,7 @@ RSpec.describe ExchangeRate::CurrencyAmount do
   describe 'when initilising' do
     it 'takes a currency object & an amount value' do
       expect(amount.amount).to be_instance_of(ExchangeRate::AmountValue)
-      expect(amount.amount.to_s).to eq('100.0')
+      expect(amount.amount.to_s).to eq('100.0000')
       expect(amount.currency).to be(currency)
     end
   end
@@ -21,14 +21,14 @@ RSpec.describe ExchangeRate::CurrencyAmount do
   describe '#to_s' do
     it 'generates a string representation' do
       expect(currency).to receive(:code).and_return('GBP')
-      expect(amount.to_s).to eq('100.0 GBP')
+      expect(amount.to_s(round: 2)).to eq('100.00 GBP')
     end
   end
 
   describe '#to_h' do
     it 'generates a hash representation' do
       expect(currency).to receive(:code).and_return('GBP')
-      expect(amount.to_h).to eq({ amount: '100.0', currency: 'GBP' })
+      expect(amount.to_h(round: 2)).to eq({ amount: '100.00', currency: 'GBP' })
     end
   end
 end

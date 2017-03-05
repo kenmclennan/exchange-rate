@@ -44,4 +44,8 @@ module ExchangeRate
   def self.data_source
     @data_source ||= config.data_source.new(config)
   end
+
+  def self.update_data_source
+    data_source.update(repository)
+  end
 end

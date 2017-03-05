@@ -5,7 +5,7 @@ module ExchangeRate::Storage
 
     def initialize(*)
       super
-      @store = PStore.new(@config.pstore_path)
+      @store = PStore.new(@config.pstore_path,true)
       setup_index
     end
 
@@ -33,7 +33,7 @@ module ExchangeRate::Storage
     end
 
     def find_currency_at date, code
-      @store.transaction do
+      @store.transaction(true) do
         index = @store[:rates_index]
         if index[date] && index[date][code]
           { code: code, rate: index[date][code], date: date }
@@ -42,7 +42,7 @@ module ExchangeRate::Storage
     end
 
     def find_rates_at date
-      @store.transaction do
+      @store.transaction(true) do
         (@store[:rates_index][date] || {}).map do |code,rate|
           { date: date, code: code, rate: rate }
         end
@@ -50,13 +50,13 @@ module ExchangeRate::Storage
     end
 
     def currency_codes
-      @store.transaction do
+      @store.transaction(true) do
         @store[:rates_index].values.flat_map(&:keys).uniq
       end
     end
 
     def date_range
-      @store.transaction do
+      @store.transaction(true) do
         dates = @store[:rates_index].keys.sort
         [dates.first,dates.last].compact
       end

@@ -11,12 +11,12 @@ module ExchangeRate
       AmountValue.new(@amount)
     end
 
-    def to_s
-      "#{amount} #{currency.code}"
+    def to_s *options
+      "#{amount.to_s(*options)} #{currency.code}"
     end
 
-    def to_h
-      {amount: amount.to_s, currency: currency.code }
+    def to_h *options
+      {amount: amount.to_s(*options), currency: currency.code }
     end
 
     def to_d

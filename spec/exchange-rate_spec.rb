@@ -20,8 +20,15 @@ RSpec.describe ExchangeRate do
     expect(ExchangeRate.data_source).to be_instance_of(ExchangeRate::DataSource::ECBAdapter)
   end
 
+  it 'pulls data from the data source and updates the repo' do
+    ecb_xml = File.read(File.join(ExchangeRate::ROOT_DIR,'spec','data','web','ecb.xml'))
+    stub_request(:get, ExchangeRate.config.ecb_uri).to_return(body: ecb_xml)
+    ExchangeRate.update_data_source
+  end
+
   describe '#at' do
     before do
+      ExchangeRate.repository.truncate!
       ExchangeRate.repository.create(date: Date.today, code: 'GBP', rate: "0.84168")
       ExchangeRate.repository.create(date: Date.today, code: 'AUD', rate: "1.4391")
     end

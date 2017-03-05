@@ -7,7 +7,7 @@ module ExchangeRate
     end
 
     def to_s round:4
-      to_d.round(round).to_s("F")
+      (to_d.round(round).to_s("F") + '0'*round)[/.*\..{#{round}}/]
     end
 
     def to_d

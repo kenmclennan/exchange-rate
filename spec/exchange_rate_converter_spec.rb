@@ -14,11 +14,11 @@ RSpec.describe ExchangeRate::ExchangeRateConverter do
     amount = converter.convert(123)
     expect(amount).to be_instance_of(ExchangeRate::CurrencyAmount)
     expect(amount.currency).to be(euros)
-    expect(amount.amount.to_s).to eq("246.0")
+    expect(amount.amount.to_s).to eq("246.0000")
   end
 
   it 'calculates the exchange rate' do
     expect(converter.exchange_rate).to be_instance_of(ExchangeRate::AmountValue)
-    expect(converter.exchange_rate.to_s).to eq('2.0')
+    expect(converter.exchange_rate.to_s).to eq('2.0000')
   end
 end
