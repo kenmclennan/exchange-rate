@@ -21,8 +21,8 @@ module ExchangeRate
   def self.config
     @config ||= OpenStruct.new(
       db_adapter: ExchangeRate::Storage::PStoreAdapter,
-      pstore_path: File.join(ROOT_DIR,'data','exchange_rates.pstore'),
       data_source: ExchangeRate::DataSource::ECBAdapter,
+      pstore_path: :pstore_path_not_set,
       ecb_uri: "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml",
     )
   end

@@ -40,7 +40,6 @@ module ExchangeRate::Storage
     end
 
     private
-
       def build_record attributes
         ExchangeRate::CurrencyRate.new(attributes)
       end
