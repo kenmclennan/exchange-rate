@@ -1,7 +1,7 @@
 # ExchangeRate
 
 ExchangeRate is a library for calculating foreign exchange rates. It uses PStore
-To cache data for calculating the exchange rates on a given date. The local cache
+to cache data for calculating the exchange rates on a given date. The local cache
 can be populated from the data published by the European Central Bank.
 
 ## Installation
@@ -50,7 +50,7 @@ result.amount.to_s
 # '117.0713'
 
 result.amount.to_s round: 2
-# '117.0713'
+# '117.07'
 
 result.currency.code
 # 'EUR'
