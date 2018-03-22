@@ -4,7 +4,7 @@ RSpec.describe ExchangeRate::CurrencyAmount do
   let(:currency) { double }
   let(:amount)   { ExchangeRate::CurrencyAmount.new(100, currency) }
 
-  describe 'when initilising' do
+  describe 'when initialising' do
     it 'takes a currency object & an amount value' do
       expect(amount.amount).to be_instance_of(ExchangeRate::AmountValue)
       expect(amount.amount.to_s).to eq('100.0000')
